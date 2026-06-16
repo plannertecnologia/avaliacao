@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Avaliação de Potencial de Liderança e Gestão</title>
+<style>
+  * { box-sizing: border-box; }
+  body {
+    font-family: 'Segoe UI', Arial, sans-serif;
+    background: #f4f6f9;
+    margin: 0;
+    padding: 20px;
+    color: #2c3e50;
+  }
+  .container {
+    max-width: 800px;
+    margin: 0 auto;
+    background: #fff;
+    border-radius: 10px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.08);
+    padding: 30px;
+  }
+  h1 {
+    text-align: center;
+    font-size: 1.5rem;
+    color: #1a2530;
+    margin-bottom: 5px;
+  }
+  .subtitle {
+    text-align: center;
+    color: #7f8c8d;
+    margin-bottom: 25px;
+    font-size: 0.95rem;
+  }
+  .scale-box {
+    background: #eef2f7;
+    border-radius: 8px;
+    padding: 15px 20px;
+    margin-bottom: 25px;
+    font-size: 0.9rem;
+  }
+  .scale-box strong { display: block; margin-bottom: 8px; }
+  .scale-box ul { margin: 0; padding-left: 20px; }
+  section {
+    margin-bottom: 30px;
+  }
+  section h2 {
+    font-size: 1.1rem;
+    color: #2980b9;
+    border-bottom: 2px solid #2980b9;
+    padding-bottom: 5px;
+    margin-bottom: 15px;
+  }
+  .question {
+    margin-bottom: 16px;
+  }
+  .question p {
+    margin: 0 0 8px;
+    font-weight: 500;
+  }
+  .scale-options {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+  }
+  .scale-options label {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    background: #f8f9fa;
+    border: 1px solid #dcdfe3;
+    border-radius: 6px;
+    padding: 6px 12px;
+    cursor: pointer;
+    font-size: 0.9rem;
+    transition: background 0.2s, border-color 0.2s;
+  }
+  .scale-options label:hover {
+    background: #eaf2fb;
+    border-color: #2980b9;
+  }
+  .scale-options input[type="radio"] {
+    accent-color: #2980b9;
+  }
+  textarea {
+    width: 100%;
+    min-height: 80px;
+    padding: 10px;
+    border: 1px solid #dcdfe3;
+    border-radius: 6px;
+    font-family: inherit;
+    font-size: 0.9rem;
+    resize: vertical;
+  }
+  input[type="text"], input[type="date"] {
+    width: 100%;
+    padding: 8px 10px;
+    border: 1px solid #dcdfe3;
+    border-radius: 6px;
+    font-size: 0.9rem;
+    font-family: inherit;
+  }
+  .meta-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 15px;
+    margin-bottom: 25px;
+  }
+  .meta-grid .full { grid-column: 1 / -1; }
+  .meta-grid label {
+    display: block;
+    font-weight: 500;
+    margin-bottom: 5px;
+    font-size: 0.9rem;
+  }
+  button[type="submit"] {
+    display: block;
+    width: 100%;
+    padding: 14px;
+    background: #2980b9;
+    color: #fff;
+    border: none;
+    border-radius: 8px;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    margin-top: 10px;
+  }
+  button[type="submit"]:hover {
+    background: #2471a3;
+  }
+  .open-questions .question p {
+    font-weight: 600;
+    color: #1a2530;
+  }
+  #resultado {
+    display: none;
+    margin-top: 25px;
+    padding: 20px;
+    background: #eafaf1;
+    border: 1px solid #2ecc71;
+    border-radius: 8px;
+    text-align: center;
+    font-weight: 600;
+    color: #1e8449;
+  }
+</style>
+</head>
+<body>
+<div class="container">
+  <h1>Questionário — Avaliação de Potencial de Liderança e Gestão</h1>
+  <p class="subtitle">Suas respostas são importantes para o desenvolvimento profissional da pessoa avaliada.</p>
+
+  <div class="scale-box">
+    <strong>Escala de avaliação (questões 1 a 40):</strong>
+    <ul>
+      <li>1 = Discordo totalmente</li>
+      <li>2 = Discordo parcialmente</li>
+      <li>3 = Neutro</li>
+      <li>4 = Concordo parcialmente</li>
+      <li>5 = Concordo totalmente</li>
+    </ul>
+  </div>
+
+  <form id="formAvaliacao">
+
+    <div class="meta-grid">
+      <div>
+        <label for="avaliado">Nome da pessoa avaliada</label>
+        <input type="text" id="avaliado" name="avaliado">
+      </div>
+      <div>
+        <label for="avaliador">Seu nome (opcional)</label>
+        <input type="text" id="avaliador" name="avaliador">
+      </div>
+      <div class="full">
+        <label for="data">Data</label>
+        <input type="date" id="data" name="data">
+      </div>
+    </div>
+
+    <!-- 1. COMUNICAÇÃO -->
+    <section>
+      <h2>1. Comunicação</h2>
+      <div class="question"><p>1. A comunicação é clara e objetiva.</p><div class="scale-options" data-q="1"></div></div>
+      <div class="question"><p>2. Consegue explicar processos de forma simples.</p><div class="scale-options" data-q="2"></div></div>
+      <div class="question"><p>3. Escuta as pessoas antes de tomar decisões.</p><div class="scale-options" data-q="3"></div></div>
+      <div class="question"><p>4. Demonstra abertura para opiniões diferentes.</p><div class="scale-options" data-q="4"></div></div>
+      <div class="question"><p>5. Dá feedbacks de forma respeitosa e construtiva.</p><div class="scale-options" data-q="5"></div></div>
+    </section>
+
+    <!-- 2. LIDERANÇA E INFLUÊNCIA -->
+    <section>
+      <h2>2. Liderança e Influência</h2>
+      <div class="question"><p>6. Inspira confiança no time.</p><div class="scale-options" data-q="6"></div></div>
+      <div class="question"><p>7. Tem postura de dono/responsável.</p><div class="scale-options" data-q="7"></div></div>
+      <div class="question"><p>8. Influencia positivamente as pessoas.</p><div class="scale-options" data-q="8"></div></div>
+      <div class="question"><p>9. Consegue motivar a equipe mesmo em momentos difíceis.</p><div class="scale-options" data-q="9"></div></div>
+      <div class="question"><p>10. É alguém que naturalmente as pessoas seguem.</p><div class="scale-options" data-q="10"></div></div>
+    </section>
+
+    <!-- 3. GESTÃO DE CONFLITOS -->
+    <section>
+      <h2>3. Gestão de Conflitos</h2>
+      <div class="question"><p>11. Mantém equilíbrio emocional sob pressão.</p><div class="scale-options" data-q="11"></div></div>
+      <div class="question"><p>12. Resolve conflitos com maturidade.</p><div class="scale-options" data-q="12"></div></div>
+      <div class="question"><p>13. Não leva problemas para o lado pessoal.</p><div class="scale-options" data-q="13"></div></div>
+      <div class="question"><p>14. Sabe lidar com diferentes perfis de pessoas.</p><div class="scale-options" data-q="14"></div></div>
+      <div class="question"><p>15. Age com imparcialidade em situações difíceis.</p><div class="scale-options" data-q="15"></div></div>
+    </section>
+
+    <!-- 4. ORGANIZAÇÃO E EXECUÇÃO -->
+    <section>
+      <h2>4. Organização e Execução</h2>
+      <div class="question"><p>16. Demonstra boa capacidade de planejamento.</p><div class="scale-options" data-q="16"></div></div>
+      <div class="question"><p>17. Prioriza corretamente as demandas.</p><div class="scale-options" data-q="17"></div></div>
+      <div class="question"><p>18. Tem disciplina e constância.</p><div class="scale-options" data-q="18"></div></div>
+      <div class="question"><p>19. Cobra resultados de forma saudável.</p><div class="scale-options" data-q="19"></div></div>
+      <div class="question"><p>20. Consegue acompanhar múltiplas atividades sem perder qualidade.</p><div class="scale-options" data-q="20"></div></div>
+    </section>
+
+    <!-- 5. VISÃO ESTRATÉGICA -->
+    <section>
+      <h2>5. Visão Estratégica</h2>
+      <div class="question"><p>21. Entende o impacto das decisões no negócio.</p><div class="scale-options" data-q="21"></div></div>
+      <div class="question"><p>22. Pensa além do operacional.</p><div class="scale-options" data-q="22"></div></div>
+      <div class="question"><p>23. Identifica oportunidades de melhoria.</p><div class="scale-options" data-q="23"></div></div>
+      <div class="question"><p>24. Tem visão de crescimento e inovação.</p><div class="scale-options" data-q="24"></div></div>
+      <div class="question"><p>25. Consegue conectar estratégia com execução.</p><div class="scale-options" data-q="25"></div></div>
+    </section>
+
+    <!-- 6. GESTÃO DE PESSOAS -->
+    <section>
+      <h2>6. Gestão de Pessoas</h2>
+      <div class="question"><p>26. Demonstra empatia com a equipe.</p><div class="scale-options" data-q="26"></div></div>
+      <div class="question"><p>27. Desenvolve pessoas ao redor.</p><div class="scale-options" data-q="27"></div></div>
+      <div class="question"><p>28. Reconhece bons desempenhos.</p><div class="scale-options" data-q="28"></div></div>
+      <div class="question"><p>29. Consegue delegar tarefas.</p><div class="scale-options" data-q="29"></div></div>
+      <div class="question"><p>30. Cria um ambiente saudável e produtivo.</p><div class="scale-options" data-q="30"></div></div>
+    </section>
+
+    <!-- 7. MATURIDADE PROFISSIONAL -->
+    <section>
+      <h2>7. Maturidade Profissional</h2>
+      <div class="question"><p>31. Assume responsabilidades pelos erros.</p><div class="scale-options" data-q="31"></div></div>
+      <div class="question"><p>32. Recebe críticas sem reagir defensivamente.</p><div class="scale-options" data-q="32"></div></div>
+      <div class="question"><p>33. Demonstra profissionalismo nas decisões.</p><div class="scale-options" data-q="33"></div></div>
+      <div class="question"><p>34. Mantém postura ética.</p><div class="scale-options" data-q="34"></div></div>
+      <div class="question"><p>35. Tem equilíbrio entre cobrança e respeito.</p><div class="scale-options" data-q="35"></div></div>
+    </section>
+
+    <!-- 8. POTENCIAL PARA CARGO DE LIDERANÇA -->
+    <section>
+      <h2>8. Potencial para Cargo de Liderança</h2>
+      <div class="question"><p>36. Você acredita que essa pessoa está pronta para liderar uma equipe?</p><div class="scale-options" data-q="36"></div></div>
+      <div class="question"><p>37. Você trabalharia novamente sendo liderado(a) por essa pessoa?</p><div class="scale-options" data-q="37"></div></div>
+      <div class="question"><p>38. Essa pessoa teria capacidade de formar um time forte?</p><div class="scale-options" data-q="38"></div></div>
+      <div class="question"><p>39. Você confiaria decisões importantes a essa pessoa?</p><div class="scale-options" data-q="39"></div></div>
+      <div class="question"><p>40. Qual o potencial de crescimento dessa pessoa como líder?</p><div class="scale-options" data-q="40"></div></div>
+    </section>
+
+    <!-- PERGUNTAS ABERTAS -->
+    <section class="open-questions">
+      <h2>Perguntas Abertas (as mais importantes)</h2>
+
+      <div class="question">
+        <p>41. Quais são os maiores pontos fortes dessa pessoa como possível líder?</p>
+        <textarea name="q41"></textarea>
+      </div>
+      <div class="question">
+        <p>42. Quais comportamentos podem limitar o crescimento dela na gestão?</p>
+        <textarea name="q42"></textarea>
+      </div>
+      <div class="question">
+        <p>43. O que essa pessoa deveria melhorar antes de assumir uma equipe?</p>
+        <textarea name="q43"></textarea>
+      </div>
+      <div class="question">
+        <p>44. Em uma palavra, como você definiria a liderança dessa pessoa?</p>
+        <input type="text" name="q44">
+      </div>
+      <div class="question">
+        <p>45. Existe algo que essa pessoa faz MUITO melhor que a média?</p>
+        <textarea name="q45"></textarea>
+      </div>
+    </section>
+
+    <button type="submit">Enviar avaliação</button>
+    <div id="resultado">Avaliação enviada com sucesso! Obrigado pela sua participação.</div>
+  </form>
+</div>
+
+<script>
+  // Gera as opções de escala 1-5 para cada questão de 1 a 40
+  document.querySelectorAll('.scale-options').forEach(div => {
+    const q = div.getAttribute('data-q');
+    for (let i = 1; i <= 5; i++) {
+      const label = document.createElement('label');
+      const input = document.createElement('input');
+      input.type = 'radio';
+      input.name = 'q' + q;
+      input.value = i;
+      input.required = true;
+      label.appendChild(input);
+      label.appendChild(document.createTextNode(i));
+      div.appendChild(label);
+    }
+  });
+
+  document.getElementById('formAvaliacao').addEventListener('submit', function(e) {
+    e.preventDefault();
+    document.getElementById('resultado').style.display = 'block';
+    this.scrollIntoView({behavior:'smooth'});
+    // Para integrar com backend/planilha, capture os dados via FormData aqui
+  });
+</script>
+</body>
+</html>
